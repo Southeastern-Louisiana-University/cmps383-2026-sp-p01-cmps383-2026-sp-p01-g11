@@ -1,0 +1,43 @@
+using Microsoft.EntityFrameworkCore;
+using Selu383.SP26.Api;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
+public class DataContext : DbContext
+{
+	public DataContext(DbContextOptions<DataContext> options) : base(options)
+	{
+
+	}
+	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+		=> optionsBuilder
+			.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=EFDataSeeding;Trusted_Connection=True;ConnectRetryCount=0")
+			.UseSeeding((context, _) =>
+			{
+				var testLocation = context.Set<Location>().FirstOrDefault(b => b.Name == ""
+);
+				if (testLocation == null)
+				{
+					context.Set<Location>().Add(new Location
+					{
+						Name = "Southeastern",
+						Address = "123 address"
+					});
+					context.SaveChanges();
+				}
+			})
+			.UseAsyncSeeding(async (context, _, cancellationToken) =>
+			{
+				var testLocation = await context.Set<Location>().FirstOrDefaultAsync(b => b.Name == ""
+, cancellationToken);
+				if (testLocation == null)
+				{
+					context.Set<Location>().Add(new Location
+					{
+						Name = "Southeastern",
+						Address = "123 address"
+					});
+					await context.SaveChangesAsync(cancellationToken);
+				}
+			});
+	public DbSet<Location> Locations => Set<Location>();
+}

@@ -1,3 +1,4 @@
+using System.Reflection.Metadata;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
@@ -39,14 +40,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-
-public class DataContext : DbContext
-{
-	public DataContext(DbContextOptions<DataContext> options) : base(options)
-	{
-
-	}
-}
 
 //see: https://docs.microsoft.com/en-us/aspnet/core/test/integration-tests?view=aspnetcore-8.0
 // Hi 383 - this is added so we can test our web project automatically
