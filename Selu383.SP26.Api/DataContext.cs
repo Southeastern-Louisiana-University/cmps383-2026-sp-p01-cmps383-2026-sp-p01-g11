@@ -19,7 +19,20 @@ public class DataContext : DbContext
 					context.Set<Locations>().Add(new Locations
 					{
 						Name = "Southeastern",
-						Address = "123 address"
+						Address = "123 address",
+						TableCount = 1
+					});
+					context.Set<Locations>().Add(new Locations
+					{
+						Name = "Bouthseastern",
+						Address = "somwhere",
+						TableCount = 4
+					});
+					context.Set<Locations>().Add(new Locations
+					{
+						Name = "another place",
+						Address = "14124 street drive avenue",
+						TableCount = 30
 					});
 					context.SaveChanges();
 				}
