@@ -52,7 +52,7 @@ public class LocationsController : ControllerBase
 	[HttpPost(Name = "PostLocation")]
 	public IActionResult Post(LocationPostDto locationDto)
 	{
-		var entity = new Locations
+		var entity = new Location
 		{
 			Name = locationDto.Name,
 			Address = locationDto.Address,

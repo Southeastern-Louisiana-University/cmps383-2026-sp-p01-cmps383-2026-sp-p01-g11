@@ -13,22 +13,22 @@ public class DataContext : DbContext
 			.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=EFDataSeeding;Trusted_Connection=True;ConnectRetryCount=0")
 			.UseSeeding((context, _) =>
 			{
-				var testLocation = context.Set<Locations>().FirstOrDefault(b => b.Id == 1);
-				if (!context.Set<Locations>().Any())
+				var testLocation = context.Set<Location>().FirstOrDefault(b => b.Id == 1);
+				if (!context.Set<Location>().Any())
 				{
-					context.Set<Locations>().Add(new Locations
+					context.Set<Location>().Add(new Location
 					{
 						Name = "Southeastern",
 						Address = "123 address",
 						TableCount = 1
 					});
-					context.Set<Locations>().Add(new Locations
+					context.Set<Location>().Add(new Location
 					{
 						Name = "Bouthseastern",
 						Address = "somwhere",
 						TableCount = 4
 					});
-					context.Set<Locations>().Add(new Locations
+					context.Set<Location>().Add(new Location
 					{
 						Name = "another place",
 						Address = "14124 street drive avenue",
@@ -37,5 +37,5 @@ public class DataContext : DbContext
 					context.SaveChanges();
 				}
 			});
-	public DbSet<Locations> Locations => Set<Locations>();
+	public DbSet<Location> Locations => Set<Location>();
 }
