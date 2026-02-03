@@ -13,9 +13,8 @@ public class DataContext : DbContext
 			.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=EFDataSeeding;Trusted_Connection=True;ConnectRetryCount=0")
 			.UseSeeding((context, _) =>
 			{
-				var testLocation = context.Set<Location>().FirstOrDefault(b => b.Name == ""
-);
-				if (testLocation == null)
+				var testLocation = context.Set<Location>().FirstOrDefault(b => b.Id == 1);
+				if (!context.Set<Location>().Any())
 				{
 					context.Set<Location>().Add(new Location
 					{
