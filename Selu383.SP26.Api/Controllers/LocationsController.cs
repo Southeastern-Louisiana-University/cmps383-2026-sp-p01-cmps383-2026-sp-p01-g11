@@ -86,9 +86,9 @@ public class LocationsController : ControllerBase
 	}
 
 	[HttpPut(Name = "UpdateLocation")]
-	public IActionResult Put(int id, LocationPutDto locationDto)
+	public IActionResult Put(string name, LocationPutDto locationDto)
 	{
-		var location = _dataContext.Locations.Find(id);
+		var location = _dataContext.Locations.Find(name);
 		if (location == null)
 		{
 			return NotFound();
