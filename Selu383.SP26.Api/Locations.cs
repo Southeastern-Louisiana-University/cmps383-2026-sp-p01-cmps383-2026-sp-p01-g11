@@ -1,6 +1,6 @@
 namespace Selu383.SP26.Api;
 
-public class Location
+public class Locations
 {
 	public int Id { get; set; }
 	public string? Name { get; set; }
