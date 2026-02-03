@@ -15,20 +15,6 @@ public class DataContext : DbContext
 			{
 				var testLocation = context.Set<Location>().FirstOrDefault(b => b.Name == ""
 );
-				/*if (testLocation == null)
-				{
-					context.Set<Location>().Add(new Location
-					{
-						Name = "Southeastern",
-						Address = "123 address"
-					});
-					context.SaveChanges();
-				}*/
-			})
-			.UseAsyncSeeding(async (context, _, cancellationToken) =>
-			{
-				var testLocation = await context.Set<Location>().FirstOrDefaultAsync(b => b.Name == ""
-, cancellationToken);
 				if (testLocation == null)
 				{
 					context.Set<Location>().Add(new Location
@@ -36,7 +22,7 @@ public class DataContext : DbContext
 						Name = "Southeastern",
 						Address = "123 address"
 					});
-					await context.SaveChangesAsync(cancellationToken);
+					context.SaveChanges();
 				}
 			});
 	public DbSet<Location> Locations => Set<Location>();
