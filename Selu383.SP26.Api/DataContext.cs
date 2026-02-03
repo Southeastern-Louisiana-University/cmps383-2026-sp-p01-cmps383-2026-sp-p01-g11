@@ -10,7 +10,7 @@ public class DataContext : DbContext
 	}
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		=> optionsBuilder
-			.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=EFDataSeeding;Trusted_Connection=True;ConnectRetryCount=0")
+			
 			.UseSeeding((context, _) =>
 			{
 				var testLocation = context.Set<Locations>().FirstOrDefault(b => b.Id == 1);
