@@ -15,7 +15,7 @@ public class DataContext : DbContext
 			{
 				var testLocation = context.Set<Location>().FirstOrDefault(b => b.Name == ""
 );
-				if (testLocation == null)
+				/*if (testLocation == null)
 				{
 					context.Set<Location>().Add(new Location
 					{
@@ -23,7 +23,7 @@ public class DataContext : DbContext
 						Address = "123 address"
 					});
 					context.SaveChanges();
-				}
+				}*/
 			})
 			.UseAsyncSeeding(async (context, _, cancellationToken) =>
 			{
