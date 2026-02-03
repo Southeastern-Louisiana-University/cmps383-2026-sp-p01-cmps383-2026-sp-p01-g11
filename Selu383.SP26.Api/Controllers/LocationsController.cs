@@ -5,7 +5,7 @@ using Selu383.SP26.Api.Dtos;
 namespace Selu383.SP26.Api.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/locations")]
 public class LocationsController : ControllerBase
 {
 
@@ -29,6 +29,26 @@ public class LocationsController : ControllerBase
 		return Ok(result);
 	}
 
+	[HttpGet("{id}", Name = "GetLocationById")]
+	public IActionResult GetById(int id)
+	{
+		var location = _dataContext.Locations.Find(id);
+		if (location == null)
+		{
+			return NotFound();
+		}
+
+		var dto = new LocationGetDto
+		{
+			Id = location.Id,
+			Name = location.Name,
+			Address = location.Address,
+			TableCount = location.TableCount
+		};
+
+		return Ok(dto);
+	}
+
 	[HttpPost(Name = "PostLocation")]
 	public IActionResult Post(LocationPostDto locationDto)
 	{
@@ -43,13 +63,26 @@ public class LocationsController : ControllerBase
 		{
 			return BadRequest("TableCount cannot be less than one.");
 		}
+		else if (entity.Name == null || entity.Name == "")
+		{
+			return BadRequest("Name cannot be empty.");
+		}
+		else if (entity.Name.Length > 100)
+		{
+			return BadRequest("Name cannot exceed 100 characters.");
+		}
+		else if (entity.Address == null || entity.Address == "")
+		{
+			return BadRequest("Address cannot be empty.");
+		}
 		else
 		{
 			_dataContext.Locations.Add(entity);
 			_dataContext.SaveChanges();
 		}
-
-		return CreatedAtRoute("GetAllLocation", new { id = entity.Id }, entity);
+		
+		// Route to the new location, return 201
+		return CreatedAtAction(nameof(GetById), new { id = entity.Id }, entity);
 	}
 
 	[HttpPut(Name = "UpdateLocation")]
@@ -75,8 +108,10 @@ public class LocationsController : ControllerBase
 		{
 			return NotFound();
 		}
+
 		_dataContext.Locations.Remove(location);
 		_dataContext.SaveChanges();
+
 		return NoContent();
 	}
 }
