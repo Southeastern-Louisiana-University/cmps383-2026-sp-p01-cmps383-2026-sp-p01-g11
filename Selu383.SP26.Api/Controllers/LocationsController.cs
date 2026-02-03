@@ -106,12 +106,16 @@ public class LocationsController : ControllerBase
 		var location = _dataContext.Locations.Find(id);
 		if (location == null)
 		{
-			return NotFound();
+			location = _dataContext.Locations.Find(id); 
+			if (location == null)
+			{
+				return NotFound();
+			}
 		}
 
 		_dataContext.Locations.Remove(location);
 		_dataContext.SaveChanges();
 
-		return NoContent();
+		return Ok();
 	}
 }
