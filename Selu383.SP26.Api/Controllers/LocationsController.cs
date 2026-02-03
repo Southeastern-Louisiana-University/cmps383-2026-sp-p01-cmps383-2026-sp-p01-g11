@@ -100,7 +100,7 @@ public class LocationsController : ControllerBase
 		return NoContent();
 	}
 
-	[HttpDelete(Name = "DeleteLocation")]
+	[HttpDelete("{id}", Name = "DeleteLocation")]
 	public IActionResult Delete(int id)
 	{
 		var location = _dataContext.Locations.Find(id);
