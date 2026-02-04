@@ -1,4 +1,14 @@
+using System.Reflection.Metadata;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Add DbContext 
+builder.Services.AddDbContext<DataContext>(options =>
+	options.UseSqlServer(builder.Configuration.GetConnectionString("DataContext")
+	?? throw new InvalidOperationException("Connection string 'DataContext' not found.")));
+
 
 // Add services to the container.
 
@@ -9,11 +19,18 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+	var db = scope.ServiceProvider.GetRequiredService<DataContext>();
+	db.Database.Migrate();   // Creates DB + applies migrations
+}
+
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+	app.UseSwagger();
+	app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
