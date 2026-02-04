@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Selu383.SP26.Api.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20260202004348_AddLocation")]
+    [Migration("20260204010215_AddLocation")]
     partial class AddLocation
     {
         /// <inheritdoc />
@@ -18,7 +18,7 @@ namespace Selu383.SP26.Api.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.2")
+                .HasAnnotation("ProductVersion", "10.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -36,6 +36,9 @@ namespace Selu383.SP26.Api.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TableCount")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
