@@ -17,7 +17,8 @@ namespace Selu383.SP26.Api.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TableCount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
