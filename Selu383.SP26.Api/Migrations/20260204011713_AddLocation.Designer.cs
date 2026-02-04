@@ -10,7 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Selu383.SP26.Api.Migrations
 {
     [DbContext(typeof(DataContext))]
+<<<<<<<< HEAD:Selu383.SP26.Api/Migrations/20260204011713_AddLocation.Designer.cs
     [Migration("20260204011713_AddLocation")]
+========
+    [Migration("20260204010215_AddLocation")]
+>>>>>>>> tests:Selu383.SP26.Api/Migrations/20260204010215_AddLocation.Designer.cs
     partial class AddLocation
     {
         /// <inheritdoc />
