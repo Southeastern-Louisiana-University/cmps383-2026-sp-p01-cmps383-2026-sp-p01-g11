@@ -117,10 +117,8 @@ public class LocationsController : ControllerBase
 		else
 		{
 			_dataContext.SaveChanges();
-			return Ok();
+			return Ok(location);
 		}
-
-		return Ok();
 	}
 
 	[HttpDelete("{id}", Name = "DeleteLocation")]
